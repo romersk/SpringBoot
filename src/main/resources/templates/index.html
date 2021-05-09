@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Обувная фабрика</title>
+</head>
+<body>
+  <div class="wrapper">
+    <h1 class="wrapper__title">Выполните вход</h1>
+    <form class="wrapper__form" action="#" th:action="@{/input}" th:object="${user}" method="post">
+      <input class="email" type="email" th:field="${user.email}" placeholder="Введите email" required>
+      <input class="password" type="password" th:field="${user.password}" placeholder="Введите пароль" required>
+      <div class="form__wrapper">
+        <input class="login" type="submit" value="Войти">
+      </div>
+    </form>
+    <form class="wrapper__form" action="#" th:action="@{/singUp}">
+      <input class="sign-in" type="submit" value="Зарегистрироваться">
+    </form>
+  </div>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+  *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+
+  html {
+      transition: .4s;
+      font-family: Roboto;
+  }
+
+  body {
+      background-color: rgba(128, 128, 128, 0.129);
+  }
+
+  .wrapper {
+      width: 30%;
+      position: absolute;
+      left: 35%;
+      top: 30%;
+  }
+
+  .wrapper__title {
+      font-size: 28px;
+      margin-bottom: 10px;
+  }
+
+  .wrapper__form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      flex-direction: column;
+  }
+
+  .email {
+      height: 40px;
+      border: none;
+      outline: none;
+  }
+
+  .password {
+      height: 40px;
+      outline: none;
+      border: none;
+  }
+
+  input[type='submit'] {
+      background-color: cornflowerblue;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      margin: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+  }
+
+  .form__wrapper {
+      width: 100%;
+      display: flex;
+  }
+
+  .sign-in {
+      width: 50%;
+  }
+  .login {
+      width: 50%;
+  }
+
+  input[type='submit']:hover {
+      transform: scale(1.05);
+      opacity: .9;
+  }
+  </style>
+</body>
+</html>

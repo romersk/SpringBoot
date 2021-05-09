@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <h1>Регистрация пользователя</h1>
+    </div>
+    <form action="#" th:action="@{/processRegister}" th:object="${user}"
+          method="post" style="max-width: 600px; margin: 0 auto;">
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-4 col-form-label">E-mail: </label>
+                <div class="col-8">
+                    <input type="email" th:field="${user.email}" class="form-control" required/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Пароль: </label>
+                <div class="col-8">
+                    <input type="password" th:field="${user.password}" class="form-control"
+                           required minlength="6" maxlength="15"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Роль: </label>
+                <div class="col-8">
+                    <input type="text" th:field="${user.role}" class="form-control"
+                           required minlength="1" maxlength="1"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit">Зарегистрироваться</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
