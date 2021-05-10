@@ -1,6 +1,8 @@
 package com.bsuir.web.controllers;
 
+import com.bsuir.web.model.Person;
 import com.bsuir.web.model.Users;
+import com.bsuir.web.repository.PersonRepository;
 import com.bsuir.web.repository.UserRepository;
 import com.bsuir.web.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class MainController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     @GetMapping("")
     public String viewHomePage(Model model)
@@ -37,6 +42,7 @@ public class MainController {
     public String singUp(Model model)
     {
         model.addAttribute("user", new Users());
+        model.addAttribute("person", new Person());
 
         return "singUp";
     }
@@ -48,12 +54,20 @@ public class MainController {
     }
 
     @PostMapping("/processRegister")
-    public String processRegister(@ModelAttribute("user") Users users)
+    public String processRegister(@ModelAttribute("user") Users users, @ModelAttribute("person") Person person, Model model)
     {
-        //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        //String encodedPassword = passwordEncoder.encode(users.getPassword());
-        //users.setPassword(encodedPassword);
-        userRepository.save(users);
+        Users user = userRepository.findByEmail(users.getEmail());
+        if (user == null)
+        {
+            personRepository.save(person);
+            System.out.println(person.getIdPerson());
+            users.setPerson(person);
+            userRepository.save(users);
+        } else
+        {
+            model.addAttribute("message", "Пользователь с таким адресом почты существует");
+            return "singUp";
+        }
 
         return "process_success";
     }
@@ -62,23 +76,30 @@ public class MainController {
     public String input(@ModelAttribute("user") Users user, BindingResult bindingResult, Model model)
     {
             Users users = userRepository.findByEmail(user.getEmail());
-            if (user.getPassword().equals(users.getPassword()))
+            if (users != null)
             {
-                System.out.println(users.getEmail());
-                System.out.println(users.getId());
-                switch (Math.toIntExact(users.getRole()))
+                if (user.getPassword().equals(users.getPassword()))
                 {
-                    case 1:
-                        return "admin";
-                    case 2:
-                        return "user";
-                    case 3:
-                        return "expert";
+                    System.out.println(users.getEmail());
+                    System.out.println(users.getId());
+                    switch (Math.toIntExact(users.getRole()))
+                    {
+                        case 1:
+                            return "admin";
+                        case 2:
+                            return "user";
+                        case 3:
+                            return "expert";
+                    }
+                } else
+                {
+                    model.addAttribute("message", "Неверно введены данные");
                 }
             } else
             {
                 model.addAttribute("message", "Неверно введены данные");
             }
+
 
         return "index";
     }

@@ -19,6 +19,18 @@ public class Users {
     @Column(nullable = false, length = 64)
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "personId", referencedColumnName = "idPerson")
+    private Person person;
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     public Long getId() {
         return id;
     }

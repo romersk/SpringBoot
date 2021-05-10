@@ -10,6 +10,7 @@
 <body>
   <div class="wrapper">
     <h1 class="wrapper__title">Выполните вход</h1>
+    <div class="alert" th:if="${message}" th:text="${message}"></div>
     <form class="wrapper__form" action="#" th:action="@{/input}" th:object="${user}" method="post">
       <input class="email" type="email" th:field="${user.email}" placeholder="Введите email" required>
       <input class="password" type="password" th:field="${user.password}" placeholder="Введите пароль" required>

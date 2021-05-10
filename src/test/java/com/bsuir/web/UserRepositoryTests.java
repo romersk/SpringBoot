@@ -2,6 +2,7 @@ package com.bsuir.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.bsuir.web.model.Person;
 import com.bsuir.web.model.Users;
 import com.bsuir.web.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -27,9 +28,14 @@ public class UserRepositoryTests {
     @Test
     public void testCreateUser() {
         Users user = new Users();
-        user.setEmail("hello@gmail.com");
-        user.setPassword("hello");
-        user.setRole(Long.valueOf(2));
+        user.setEmail("main@gmail.com");
+        user.setPassword("main");
+        user.setRole(Long.valueOf(3));
+        Person person = new Person();
+        person.setFirstName("Игорь");
+        person.setSecondName("Денисов");
+        person.setWorkPlace("ОАО Марко");
+        user.setPerson(person);
 
 
         Users savedUser = repo.save(user);
