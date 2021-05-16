@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title>Изменение</title>
+</head>
+<body>
+<div align="center">
+  <h1>Изменение данных пользователя</h1>
+  <br />
+  <form action="#" th:action="@{/save}" th:object="${user}"
+        method="post">
+
+    <table border="0" cellpadding="10">
+      <tr>
+        <td>ID пользователя:</td>
+        <td><input type="text" th:field="${user.id}" readonly/></td>
+      </tr>
+      <tr>
+        <td>Адрес почты:</td>
+        <td>
+          <input type="email" th:field="${user.email}" />
+        </td>
+      </tr>
+      <tr>
+        <td>Пароль:</td>
+        <td><input type="password" th:field="${user.password}" /></td>
+      </tr>
+      <tr>
+      <tr>
+        <td>Роль:</td>
+        <td><input type="text" th:field="${user.role}" readonly/></td>
+      </tr>
+      <input type="hidden" th:field="${user.person.idPerson}">
+      <tr>
+        <td>Имя:</td>
+        <td><input type="text" th:field="${user.person.firstName}" /></td>
+      </tr>
+      <tr>
+        <td>Фамилия:</td>
+        <td><input type="text" th:field="${user.person.secondName}" /></td>
+      </tr>
+      <tr>
+        <td>Место работы:</td>
+        <td><input type="text" th:field="${user.person.workPlace}" /></td>
+      </tr>
+      <tr>
+        <td colspan="2"><button type="submit">Сохранить изменения</button> </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

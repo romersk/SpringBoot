@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Список пользователей</title>
+</head>
+<body>
+<div align="center">
+  <h1>Список пользователей</h1>
+  <a href="/admin">Вернуть назад</a>
+  <br/><br/>
+  <table border="1" cellpadding="10">
+    <thead>
+    <tr>
+      <th>ID Пользователя</th>
+      <th>Адрес почты</th>
+      <th>Роль</th>
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>Место работы</th>
+      <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${userList}">
+      <td th:text="${user.id}">ID Пользователя</td>
+      <td th:text="${user.email}">Адрес почты</td>
+      <div th:switch="${user.role}">
+        <td th:case="'2'">Работник фабрики</td>
+        <td th:case="'3'">Эксперт</td>
+      </div>
+      <td th:text="${user.person.firstName}">Имя</td>
+      <td th:text="${user.person.secondName}">Фамилия</td>
+      <td th:text="${user.person.workPlace}">Место работы</td>
+      <td>
+        <a th:href="@{'/edit/' + ${user.id}}">Изменить</a>
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="@{'/delete/' + ${user.id}}">Удалить</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

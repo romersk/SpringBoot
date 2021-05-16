@@ -2,6 +2,7 @@ package com.bsuir.web.service;
 
 import java.util.Collection;
 
+import com.bsuir.web.model.Person;
 import com.bsuir.web.model.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,5 +58,9 @@ public class CustomUserDetails implements UserDetails {
     public Long getId()
     {
         return user.getId();
+    }
+
+    public Person getPerson() {
+        return user.getPerson();
     }
 }

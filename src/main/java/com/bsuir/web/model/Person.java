@@ -1,6 +1,7 @@
 package com.bsuir.web.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table (name = "person")
@@ -21,6 +22,9 @@ public class Person {
 
     @OneToOne(mappedBy = "person")
     private Users users;
+
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    private Collection<Shoes> shoesCollection;
 
     public Long getIdPerson() {
         return idPerson;
@@ -60,5 +64,13 @@ public class Person {
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public Collection<Shoes> getShoesCollection() {
+        return shoesCollection;
+    }
+
+    public void setShoesCollection(Collection<Shoes> shoesCollection) {
+        this.shoesCollection = shoesCollection;
     }
 }
