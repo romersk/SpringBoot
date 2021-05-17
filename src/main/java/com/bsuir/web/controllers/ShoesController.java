@@ -2,12 +2,14 @@ package com.bsuir.web.controllers;
 
 import com.bsuir.web.model.Person;
 import com.bsuir.web.model.Shoes;
+import com.bsuir.web.model.Users;
 import com.bsuir.web.repository.PersonRepository;
 import com.bsuir.web.repository.ShoesRepository;
 import com.bsuir.web.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -209,5 +211,45 @@ public class ShoesController {
         model.addAttribute("shoesList", personList.get(0).getShoesCollection());
 
         return "filtrate";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model)
+    {
+        List<Person> personList = personRepository.findAll();
+        List<Person> outList = new ArrayList<>();
+
+        for (int i=0; i<personList.size(); i++) {
+
+            if (personList.get(i).getUsers().getRole() == 2) {
+                outList.add(personList.get(i));
+            }
+        }
+        model.addAttribute("personList", outList);
+        model.addAttribute("person", new Person());
+        return "search";
+    }
+
+    @PostMapping("/searchID")
+    public String searchPage(@ModelAttribute("person") Person person, BindingResult bindingResult, Model model) {
+
+        Person person1 = personRepository.findById(person.getIdPerson()).get();
+
+        Collection<Shoes> shoesCollection = person1.getShoesCollection();
+        
+        model.addAttribute("shoesList",shoesCollection);
+
+        List<Person> personList = personRepository.findAll();
+        List<Person> outList = new ArrayList<>();
+
+        for (int i=0; i<personList.size(); i++) {
+
+            if (personList.get(i).getUsers().getRole() == 2) {
+                outList.add(personList.get(i));
+            }
+        }
+        model.addAttribute("personList", outList);
+        model.addAttribute("person", new Person());
+        return "search";
     }
 }
