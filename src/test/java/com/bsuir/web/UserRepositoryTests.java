@@ -116,17 +116,17 @@ public class UserRepositoryTests {
     public void testAddShoes()
     {
         Shoes shoes = new Shoes();
-        shoes.setIdShoes(Long.valueOf(2));
-        shoes.setNameShoes("Ботинки №123");
-        shoes.setCosts(Double.valueOf(65.10));
+        shoes.setIdShoes(Long.valueOf(3));
+        shoes.setNameShoes("Полуботинки женские №1067");
+        shoes.setCosts(Double.valueOf(45.99));
 
-        Person person = personRepository.findByName("Денис");
+        Person person = personRepository.findByName("Василий");
 
         shoes.setPerson(person);
 
         shoesRepository.save(shoes);
 
-        assertThat(shoes.getIdShoes()).isEqualTo(Long.valueOf(2));
+        assertThat(shoes.getIdShoes()).isEqualTo(Long.valueOf(3));
 
     }
 }

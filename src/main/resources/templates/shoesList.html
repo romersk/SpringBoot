@@ -8,7 +8,18 @@
 <body>
 <div align="center">
   <h1>Список произведенной обуви</h1>
-  <a href="/admin">Вернуть назад</a>
+  <form action="#" th:action="@{/admin}">
+    <input type="submit" value="Вернуть назад">
+  </form>
+  <form action="#" th:action="@{/sortByName}">
+    <input type="submit" value="Сортировка по наименованию">
+  </form>
+  <form action="#" th:action="@{/sortById}">
+    <input type="submit" value="Сортировка по ID">
+  </form>
+  <form action="#" th:action="@{/sortByCosts}">
+    <input type="submit" value="Сортировка по стоимости">
+  </form>
   <br/><br/>
   <table border="1" cellpadding="10">
     <thead>

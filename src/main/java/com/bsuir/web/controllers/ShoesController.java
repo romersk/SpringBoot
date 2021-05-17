@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ShoesController {
@@ -36,7 +33,6 @@ public class ShoesController {
     public String shoesList(Model model)
     {
         List<Shoes> shoesList = shoesRepository.findAll();
-        System.out.println(shoesList.get(0).getIdShoes());
         model.addAttribute("shoesList", shoesList);
         return "shoesList";
 
@@ -108,5 +104,110 @@ public class ShoesController {
                 List.of("Pepperoni", 4)
         );*/
         return list;
+    }
+
+    @GetMapping("/sortById")
+    public String sortId(Model model)
+    {
+        List<Shoes> shoesList = shoesRepository.findAll();
+        Collections.sort(shoesList, new Comparator<Shoes>() {
+            public int compare(Shoes o1, Shoes o2) {
+                return o1.getIdShoes().compareTo(o2.getIdShoes());
+            }
+        });
+        model.addAttribute("shoesList", shoesList);
+        return "shoesList";
+    }
+
+    @GetMapping("/sortByName")
+    public String sortByName(Model model)
+    {
+        List<Shoes> shoesList = shoesRepository.findAll();
+        Collections.sort(shoesList, new Comparator<Shoes>() {
+            public int compare(Shoes o1, Shoes o2) {
+                return o1.getNameShoes().compareTo(o2.getNameShoes());
+            }
+        });
+        model.addAttribute("shoesList", shoesList);
+        return "shoesList";
+    }
+
+    @GetMapping("/sortByCosts")
+    public String sortByCosts(Model model)
+    {
+        List<Shoes> shoesList = shoesRepository.findAll();
+        Collections.sort(shoesList, new Comparator<Shoes>() {
+            public int compare(Shoes o1, Shoes o2) {
+                return o1.getCosts().compareTo(o2.getCosts());
+            }
+        });
+        model.addAttribute("shoesList", shoesList);
+        return "shoesList";
+    }
+
+    @GetMapping("/filtrate")
+    public String filtrate(Model model)
+    {
+        List<Shoes> shoesList = shoesRepository.findAll();
+        model.addAttribute("shoesList", shoesList);
+        return "filtrate";
+    }
+
+    @GetMapping("/filtrateCheap")
+    public String filtrateCheap(Model model)
+    {
+        List<Shoes> shoesList = shoesRepository.findAll();
+        List<Shoes> outList = new ArrayList<>();
+        for (int i=0; i < shoesList.size(); i++) {
+            if (shoesList.get(i).getCosts().compareTo(50.0) <= 0) {
+                outList.add(shoesList.get(i));
+            }
+        }
+        if (outList.isEmpty()) {
+            model.addAttribute("message", "По данному параметру ничего не найдено");
+        } else {
+            model.addAttribute("shoesList", outList);
+        }
+        return "filtrate";
+    }
+
+    @GetMapping("/filtrateExpensive")
+    public String filtrateExpensive(Model model)
+    {
+        List<Shoes> shoesList = shoesRepository.findAll();
+        List<Shoes> outList = new ArrayList<>();
+        for (int i=0; i < shoesList.size(); i++) {
+            if (shoesList.get(i).getCosts().compareTo(150.0) >= 0) {
+                outList.add(shoesList.get(i));
+            }
+        }
+        if (outList.isEmpty()) {
+            model.addAttribute("message", "По данному параметру ничего не найдено");
+        } else {
+            model.addAttribute("shoesList", outList);
+        }
+        return "filtrate";
+    }
+
+    @GetMapping("/filtratePeople")
+    public String filtratePeople(Model model)
+    {
+        List<Person> personList = personRepository.findAll();
+
+        Collections.sort(personList, new Comparator<Person>() {
+            public int compare(Person o1, Person o2) {
+                if (o1.getShoesCollection().size() < o2.getShoesCollection().size()) {
+                    return 1;
+                } else if (o1.getShoesCollection().size() > o2.getShoesCollection().size()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        model.addAttribute("shoesList", personList.get(0).getShoesCollection());
+
+        return "filtrate";
     }
 }

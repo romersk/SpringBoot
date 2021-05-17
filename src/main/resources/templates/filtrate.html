@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Фильрация</title>
+</head>
+<body>
+<div align="center">
+  <h1>Функции фильрации данных</h1>
+  <form action="#" th:action="@{/admin}">
+    <input type="submit" value="Вернуть назад">
+  </form>
+  <form action="#" th:action="@{/filtrateCheap}">
+    <input type="submit" value="Вывод информации об обуви дешевле 50р">
+  </form>
+  <form action="#" th:action="@{/filtrateExpensive}">
+    <input type="submit" value="Вывод информации об обуви дороже 150р">
+  </form>
+  <form action="#" th:action="@{/filtratePeople}">
+    <input type="submit" value="Вывод информации об обуви, произведенной больше всего одним работником">
+  </form>
+  <br/><br/>
+  <div class="alert" th:if="${message}" th:text="${message}"></div>
+  <div th:unless="${message}">
+    <table border="1" cellpadding="10">
+      <thead>
+      <tr>
+        <th>ID Обуви</th>
+        <th>Наименование товара</th>
+        <th>Стоимость</th>
+        <th>Имя производителя</th>
+        <th>Фамилия производителя</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="shoes : ${shoesList}">
+        <td th:text="${shoes.idShoes}">ID Обуви</td>
+        <td th:text="${shoes.nameShoes}">Наименование товара</td>
+        <td th:text="${shoes.costs}">Стоимость</td>
+        <td th:text="${shoes.person.firstName}">Имя производителя</td>
+        <td th:text="${shoes.person.secondName}">Фамилия производителя</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
