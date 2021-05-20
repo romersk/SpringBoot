@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Цели</title>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <h1>Добавление цели</h1>
+    </div>
+    <form action="#" th:action="@{/processGoal}" th:object="${goals}"
+          method="post" style="max-width: 600px; margin: 0 auto;">
+        <div class="m-3">
+            <div class="form-group row">
+                <div class="alert" th:if="${message}" th:text="${message}"></div>
+                <label class="col-4 col-form-label">Наименование цели: </label>
+                <div class="col-8">
+                    <input type="text" th:field="${goals.nameGoal}" class="form-control" required minlength="5" maxlength="64"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit">Сохранить</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

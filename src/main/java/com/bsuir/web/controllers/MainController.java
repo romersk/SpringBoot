@@ -1,10 +1,7 @@
 package com.bsuir.web.controllers;
 
 import com.bsuir.web.model.*;
-import com.bsuir.web.repository.GoalsRepository;
-import com.bsuir.web.repository.PersonRepository;
-import com.bsuir.web.repository.ShoesRepository;
-import com.bsuir.web.repository.UserRepository;
+import com.bsuir.web.repository.*;
 //import com.bsuir.web.service.CustomUserDetails;
 import com.bsuir.web.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +43,9 @@ public class MainController {
     @Autowired
     private GoalsRepository goalsRepository;
 
+    @Autowired
+    private GoalsPersonRepository goalsPersonRepository;
+
     private Users customUserDetails;
 
     @GetMapping("")
@@ -84,7 +84,6 @@ public class MainController {
         if (user == null)
         {
             personRepository.save(person);
-            System.out.println(person.getIdPerson());
             users.setPerson(person);
             userRepository.save(users);
         } else
@@ -95,6 +94,7 @@ public class MainController {
 
         return "process_success";
     }
+
 
     @PostMapping("/input")
     public String input(@ModelAttribute("user") Users user, BindingResult bindingResult, Model model)
@@ -375,8 +375,47 @@ public class MainController {
             }
         }
 
-        List<Double> 
-        
+        List<Double> doubleList = new ArrayList<>();
+
+        for (int i=0; i < list.size(); i++) {
+
+            double sum = 0;
+
+            for (int j=0; j < list.size(); j++) {
+                sum += list.get(i).get(j);
+            }
+
+            sum /= sizeMax;
+            sum /= sizeMax;
+
+            sum = (double) Math.round(sum * 1000) / 1000;
+            doubleList.add(sum);
+        }
+
+        List<Goals> goalsList = goalsRepository.findAll();
+        List<GoalsPerson> goalsPerson = goalsPersonRepository.findByPersonId(customUserDetails.getPerson().getIdPerson());
+
+        for (int i=0; i < goalsList.size(); i++) {
+
+            GoalsPerson goalsPerson1;
+            if (i < goalsPerson.size()) {
+
+                goalsPerson1 = goalsPerson.get(i);
+                goalsPerson1.setRate(doubleList.get(i));
+
+            } else {
+
+                goalsPerson1 = new GoalsPerson();
+                goalsPerson1.setRate(doubleList.get(i));
+                goalsPerson1.setGoals(goalsList.get(i));
+                Person person = customUserDetails.getPerson();
+                goalsPerson1.setPerson(person);
+                goalsPerson1.setIdGoalsPerson(Long.valueOf(8));
+
+            }
+            goalsPersonRepository.save(goalsPerson1);
+
+        }
 
         return "expert";
     }

@@ -1,8 +1,6 @@
 package com.bsuir.web.controllers;
 
-import com.bsuir.web.model.Goals;
-import com.bsuir.web.model.GoalsPerson;
-import com.bsuir.web.model.Shoes;
+import com.bsuir.web.model.*;
 import com.bsuir.web.repository.GoalsPersonRepository;
 import com.bsuir.web.repository.GoalsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +62,32 @@ public class GoalsController {
         model.addAttribute("chartData", getChartData());
 
         return "solveTask";
+    }
+
+    @GetMapping("/singGoal")
+    public String singGoal(Model model)
+    {
+        model.addAttribute("goals", new Goals());
+
+        return "singGoal";
+    }
+
+    @PostMapping("/processGoal")
+    public String processGoal(@ModelAttribute("goals") Goals goals, Model model)
+    {
+        Goals goals1 = goalsRepository.findByName(goals.getNameGoal());
+        if (goals1 == null)
+        {
+            goalsRepository.save(goals);
+        } else
+        {
+            model.addAttribute("message", "Цель с таким названием существует");
+            return "singGoal";
+        }
+
+        List<Goals> goalsList = goalsRepository.findAll();
+        model.addAttribute("goalsList", goalsList);
+        return "goalsList";
     }
 
     private Map<String, Double> getHashMap()
