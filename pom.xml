@@ -56,14 +56,14 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.4.31.Final</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<artifactId>spring-boot-autoconfigure</artifactId>
 			<groupId>org.springframework.boot</groupId>

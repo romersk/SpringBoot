@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title>Изменение</title>
+</head>
+<body>
+<div align="center">
+  <h1>Изменение цели</h1>
+  <br />
+  <form action="#" th:action="@{/saveGoals}" th:object="${goals}"
+        method="post">
+
+    <table border="0" cellpadding="10">
+      <tr>
+        <td>ID обуви:</td>
+        <td><input type="text" th:field="${goals.idGoal}" readonly/></td>
+      </tr>
+      <tr>
+        <td>Наименование:</td>
+        <td>
+          <input type="text" th:field="${goals.nameGoal}" minlength="1" maxlength="35"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><button type="submit">Сохранить изменения</button> </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

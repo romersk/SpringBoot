@@ -2,12 +2,8 @@ package com.bsuir.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.bsuir.web.model.Person;
-import com.bsuir.web.model.Shoes;
-import com.bsuir.web.model.Users;
-import com.bsuir.web.repository.PersonRepository;
-import com.bsuir.web.repository.ShoesRepository;
-import com.bsuir.web.repository.UserRepository;
+import com.bsuir.web.model.*;
+import com.bsuir.web.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -34,6 +30,12 @@ public class UserRepositoryTests {
 
     @Autowired
     private ShoesRepository shoesRepository;
+
+    @Autowired
+    private GoalsRepository goalsRepository;
+
+    @Autowired
+    private GoalsPersonRepository goalsPersonRepository;
 
     @Test
     public void testCreateUser() {
@@ -127,6 +129,24 @@ public class UserRepositoryTests {
         shoesRepository.save(shoes);
 
         assertThat(shoes.getIdShoes()).isEqualTo(Long.valueOf(3));
+
+    }
+
+    @Test
+    public void testNewGoals()
+    {
+        GoalsPerson goalsPerson = new GoalsPerson();
+
+        Person person = personRepository.findByName("Игорь");
+        Goals goals = goalsRepository.findById(Long.valueOf(5)).get();
+
+        goalsPerson.setPerson(person);
+        goalsPerson.setGoals(goals);
+        goalsPerson.setRate(Double.valueOf(0.05));
+
+        goalsPersonRepository.save(goalsPerson);
+
+        //assertThat(goals.getIdGoal()).isEqualTo(Long.valueOf(1));
 
     }
 }

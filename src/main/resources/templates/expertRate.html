@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/expert">Вернуть назад</a>
+
+<table border="1" cellpadding="10" align="center">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Наименование цели</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="goals : ${goalList}">
+        <td th:text="${goals.key}">ID Обуви</td>
+        <td th:text="${goals.value}">Наименование товара</td>
+    </tr>
+    </tbody>
+</table>
+
+<br></br>
+
+<form action="#" th:action="@{/processTask}" th:object="${formBean}"
+      method="post">
+    <table align="center">
+        <tr th:each="row,i: ${matrix}">
+            <td th:text="'Z' + (${i.index}+1)"></td>
+            <td th:each="value,j: ${row}">
+                <div th:if="${j.index} &gt ${i.index}">
+                    <input type="number" th:field="*{matrix[__${i.index}__][__${j.index}__]}" required min="0" max="${size}"/>
+                </div>
+                <div th:unless="${j.index} &gt ${i.index}">
+                    <input type="number" th:field="*{matrix[__${i.index}__][__${j.index}__]}" readonly/>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        <button type="submit">Сохранить результаты</button>
+    </div>
+
+</form>
+
+</body>
+</html>

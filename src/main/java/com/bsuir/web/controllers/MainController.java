@@ -1,10 +1,11 @@
 package com.bsuir.web.controllers;
 
-import com.bsuir.web.model.Person;
-import com.bsuir.web.model.Users;
+import com.bsuir.web.model.*;
+import com.bsuir.web.repository.GoalsRepository;
 import com.bsuir.web.repository.PersonRepository;
+import com.bsuir.web.repository.ShoesRepository;
 import com.bsuir.web.repository.UserRepository;
-import com.bsuir.web.service.CustomUserDetails;
+//import com.bsuir.web.service.CustomUserDetails;
 import com.bsuir.web.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -25,7 +26,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class MainController {
@@ -39,8 +40,13 @@ public class MainController {
     @Autowired
     private UsersService usersService;
 
+    @Autowired
+    private ShoesRepository shoesRepository;
 
-    private CustomUserDetails customUserDetails;
+    @Autowired
+    private GoalsRepository goalsRepository;
+
+    private Users customUserDetails;
 
     @GetMapping("")
     public String viewHomePage(Model model)
@@ -98,7 +104,12 @@ public class MainController {
             {
                 if (user.getPassword().equals(users.getPassword()))
                 {
-                    customUserDetails = new CustomUserDetails(users);
+                    customUserDetails = new Users();
+                    customUserDetails.setId(users.getId());
+                    customUserDetails.setRole(users.getRole());
+                    customUserDetails.setEmail(users.getEmail());
+                    customUserDetails.setPassword(users.getPassword());
+                    customUserDetails.setPerson(users.getPerson());
                     switch (Math.toIntExact(users.getRole()))
                     {
                         case 1:
@@ -146,7 +157,7 @@ public class MainController {
         int deleteNum = -1;
         for (int i = 0; i < usersList.size(); i++)
         {
-            if (usersList.get(i).getEmail().equals(customUserDetails.getUsername()))
+            if (usersList.get(i).getEmail().equals(customUserDetails.getEmail()))
             {
                 deleteNum = i;
             }
@@ -161,7 +172,7 @@ public class MainController {
     {
         Users users = new Users();
         users.setId(customUserDetails.getId());
-        users.setEmail(customUserDetails.getUsername());
+        users.setEmail(customUserDetails.getEmail());
         users.setPassword(customUserDetails.getPassword());
         users.setRole(customUserDetails.getRole());
         users.setPerson(customUserDetails.getPerson());
@@ -200,11 +211,173 @@ public class MainController {
         return mav;
     }
 
+    @GetMapping("/logout")
+    public String homePage(Model model)
+    {
+        model.addAttribute("user", new Users());
+        return "index";
+    }
+
     @PostMapping("/saveAdmin")
     private String saveAdmin(@ModelAttribute("user") Users users)
     {
         userRepository.save(users);
-        customUserDetails = new CustomUserDetails(users);
+        customUserDetails = new Users();
+        customUserDetails.setId(users.getId());
+        customUserDetails.setRole(users.getRole());
+        customUserDetails.setEmail(users.getEmail());
+        customUserDetails.setPassword(users.getPassword());
+        customUserDetails.setPerson(users.getPerson());
+        //customUserDetails = new CustomUserDetails(users);
         return "redirect:/adminInfo";
+    }
+
+    @GetMapping("/userInfo")
+    private String userInfo(Model model)
+    {
+        Users users = new Users();
+        users.setId(customUserDetails.getId());
+        users.setEmail(customUserDetails.getEmail());
+        users.setPassword(customUserDetails.getPassword());
+        users.setRole(customUserDetails.getRole());
+        users.setPerson(customUserDetails.getPerson());
+        model.addAttribute("user", users);
+        return "userInfo";
+    }
+
+    @PostMapping("/processShoes")
+    public String processShoes(@ModelAttribute("shoes")Shoes shoes, Model model)
+    {
+        Shoes shoes1 = shoesRepository.findByName(shoes.getNameShoes());
+        if (shoes1 == null)
+        {
+            Person person = personRepository.findById(customUserDetails.getPerson().getIdPerson()).get();
+            shoes.setPerson(person);
+            shoesRepository.save(shoes);
+        } else
+        {
+            model.addAttribute("message", "Обувь с таким названием существует");
+            return "createShoes";
+        }
+
+        return "user";
+    }
+
+    @GetMapping("/userShoesList")
+    public String userShoesList(Model model)
+    {
+        List<Shoes> shoesList = shoesRepository.findAll();
+
+        List<Shoes> shoesCollection = new ArrayList<>();
+
+        for (int i = 0; i < shoesList.size(); i++) {
+            if (shoesList.get(i).getPerson().getIdPerson().equals(customUserDetails.getPerson().getIdPerson())) {
+                shoesCollection.add(shoesList.get(i));
+            }
+        }
+
+        model.addAttribute("shoesList", shoesCollection);
+        return "userShoesList";
+    }
+
+    @PostMapping("/saveShoesUser")
+    private String saveShoes(@ModelAttribute("shoes") Shoes shoes)
+    {
+        Person person = personRepository.findById(customUserDetails.getPerson().getIdPerson()).get();
+        shoes.setPerson(person);
+        shoesRepository.save(shoes);
+        return "redirect:/userShoesList";
+    }
+
+    @GetMapping("/createShoes")
+    public String createShoes(Model model)
+    {
+        model.addAttribute("shoes", new Shoes());
+        return "createShoes";
+    }
+
+    @GetMapping("/editShoesUser/{id}")
+    public ModelAndView showShoesUser(@PathVariable(name = "id") Long id) {
+        ModelAndView mav = new ModelAndView("editShoesUser");
+        Shoes shoes = shoesRepository.getOne(id);
+        mav.addObject("shoes", shoes);
+
+        return mav;
+    }
+
+    @PostMapping("/deleteShoesUser/{id}")
+    public String deleteShoesUser(@PathVariable(name = "id") Long id) {
+        shoesRepository.deleteById(id);
+        return "redirect:/userShoesList";
+    }
+
+    @GetMapping("/expertInfo")
+    private String expertInfo(Model model)
+    {
+        Users users = new Users();
+        users.setId(customUserDetails.getId());
+        users.setEmail(customUserDetails.getEmail());
+        users.setPassword(customUserDetails.getPassword());
+        users.setRole(customUserDetails.getRole());
+        users.setPerson(customUserDetails.getPerson());
+        model.addAttribute("user", users);
+        return "expertInfo";
+    }
+
+    @GetMapping("/expertRate")
+    private String expertRate(Model model) {
+        List<Goals> goalsList = goalsRepository.findAll();
+        HashMap<String, String> map = new HashMap<>();
+
+        for (int i = 0; i< goalsList.size(); i++) {
+            Integer inte = (i+1);
+            String state = 'Z' + inte.toString();
+            map.put(state, goalsList.get(i).getNameGoal());
+
+        }
+
+        int size = goalsList.size();
+        int sizeX = size*(size-1);
+        model.addAttribute("goalList", map);
+        model.addAttribute("size", Long.valueOf(sizeX));
+
+        Long[][] matrix = new Long[size][size];
+        model.addAttribute("matrix", matrix);
+
+        model.addAttribute("formBean", new FormBean(getVerteilungenMatrix(size)));
+
+        return "expertRate";
+    }
+
+    private List<List<Long>> getVerteilungenMatrix(int size) {
+        List<List<Long>> result2 = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            result2.add(new ArrayList<>());
+
+            for (int j=0; j <size; j++) {
+                result2.get(i).add(Long.valueOf(0));
+            }
+        }
+        return result2;
+    }
+
+    @PostMapping("/processTask")
+    public String processTask(@ModelAttribute("formBean") FormBean formBean, Model model)
+    {
+
+        List<List<Long>> list= formBean.getMatrix();
+        int sizeMax = list.size() * (list.size()-1);
+
+        for (int i=0; i < list.size(); i++) {
+            for (int j=i+1; j < list.size(); j++) {
+                Long temp = Long.valueOf(sizeMax) - list.get(i).get(j);
+                list.get(j).set(i, temp);
+            }
+        }
+
+        List<Double> 
+        
+
+        return "expert";
     }
 }

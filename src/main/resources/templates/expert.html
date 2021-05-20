@@ -3,11 +3,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Expert</title>
+    <title>User</title>
 </head>
 <body>
-<form th:action="@{/logout}" method="post">
+<form th:action="@{/}">
     <input type="submit" value="Выйти"/>
-    <h2>Эксперт</h2>
+</form>
+<h2>Меню пользователя</h2>
+<form action="#" th:action="@{/expertInfo}">
+    <input type="submit" value="Личная информация">
+</form>
+<form action="#" th:action="@{/expertRate}">
+    <input type="submit" value="Решение экспертного метода">
+</form>
 </body>
+
 </html>

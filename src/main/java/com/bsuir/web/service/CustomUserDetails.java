@@ -1,5 +1,5 @@
 package com.bsuir.web.service;
-
+/*
 import java.util.Collection;
 
 import com.bsuir.web.model.Person;
@@ -63,4 +63,4 @@ public class CustomUserDetails implements UserDetails {
     public Person getPerson() {
         return user.getPerson();
     }
-}
+}*/

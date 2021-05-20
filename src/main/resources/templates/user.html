@@ -6,9 +6,19 @@
     <title>User</title>
 </head>
 <body>
-    <form th:action="@{/logout}" method="post">
+<form th:action="@{/}">
     <input type="submit" value="Выйти"/>
-        <h2>Пользователь</h2>
+</form>
+<h2>Меню пользователя</h2>
+<form action="#" th:action="@{/userInfo}">
+    <input type="submit" value="Личная информация">
+</form>
+<form action="#" th:action="@{/createShoes}">
+    <input type="submit" value="Производство обуви">
+</form>
+<form action="#" th:action="@{/userShoesList}">
+    <input type="submit" value="Отчет о производимой обуви">
 </form>
 </body>
+
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Личная информация</title>
+</head>
+<body>
+<div align="center">
+    <h1>Личная информация</h1>
+    <a href="/expert">Вернуть назад</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>ID Пользователя</th>
+            <th>Адрес почты</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Место работы</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td th:text="${user.id}">ID Пользователя</td>
+        <td th:text="${user.email}">Адрес почты</td>
+        <td th:text="${user.person.firstName}">Имя</td>
+        <td th:text="${user.person.secondName}">Фамилия</td>
+        <td th:text="${user.person.workPlace}">Место работы</td>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

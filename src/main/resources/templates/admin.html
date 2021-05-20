@@ -6,7 +6,7 @@
     <title>Admin</title>
 </head>
 <body>
-<form th:action="@{/logout}" method="post">
+<form th:action="@{/}">
     <input type="submit" value="Выйти"/>
 </form>
 <h2>Меню администратора</h2>
@@ -30,6 +30,12 @@
 </form>
 <form action="#" th:action="@{/search}">
     <input type="submit" value="Просмотр информации по параметру">
+</form>
+<form action="#" th:action="@{/goalsList}">
+    <input type="submit" value="Администрирование целями">
+</form>
+<form action="#" th:action="@{/solveTask}">
+    <input type="submit" value="Решение экспертного метода">
 </form>
 </body>
 

@@ -2,6 +2,7 @@ package com.bsuir.web.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table (name = "person")
@@ -25,6 +26,17 @@ public class Person {
 
     @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     private Collection<Shoes> shoesCollection;
+
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    private Collection<GoalsPerson> goalsPeople;
+
+    public Collection<GoalsPerson> getGoalsPeople() {
+        return goalsPeople;
+    }
+
+    public void setGoalsPeople(Collection<GoalsPerson> goalsPeople) {
+        this.goalsPeople = goalsPeople;
+    }
 
     public Long getIdPerson() {
         return idPerson;

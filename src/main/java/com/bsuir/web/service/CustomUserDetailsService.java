@@ -1,5 +1,5 @@
 package com.bsuir.web.service;
-
+/*
 import com.bsuir.web.model.Users;
 import com.bsuir.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +21,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
 
-}
+}*/

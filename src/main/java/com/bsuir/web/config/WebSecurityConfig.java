@@ -1,7 +1,7 @@
 package com.bsuir.web.config;
 
 import javax.sql.DataSource;
-
+/*
 import com.bsuir.web.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -47,15 +47,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/user").authenticated()
+                .antMatchers("/*").authenticated()
                 .anyRequest().permitAll()
                 .and()
                     .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/input")
                     .usernameParameter("email")
-                    .defaultSuccessUrl("/users")
+                    .defaultSuccessUrl("/admin")
+                    .defaultSuccessUrl("/user")
                     .permitAll()
                 .and()
                     .logout().logoutSuccessUrl("/").permitAll();
     }
 
-}
+}*/

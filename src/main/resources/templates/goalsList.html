@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Список исследуемых целей</title>
+</head>
+<body>
+<div align="center">
+  <h1>Список исследуемых целей</h1>
+  <form action="#" th:action="@{/admin}">
+    <input type="submit" value="Вернуть назад">
+  </form>
+  <br/><br/>
+  <table border="1" cellpadding="10">
+    <thead>
+    <tr>
+      <th>ID цели</th>
+      <th>Наименование цели</th>
+      <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="goals : ${goalsList}">
+      <td th:text="${goals.idGoal}">ID цели</td>
+      <td th:text="${goals.nameGoal}">Наименование цели</td>
+      <td>
+        <a th:href="@{'/editGoals/' + ${goals.idGoal}}">Изменить</a>
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="@{'/deleteGoals/' + ${goals.idGoal}}">Удалить</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
