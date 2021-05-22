@@ -6,13 +6,13 @@
   <title>Изменение</title>
 </head>
 <body>
-<div align="center">
+<div class="wrapper" align="center">
   <h1>Изменение данных об обуви</h1>
   <br />
   <form action="#" th:action="@{/saveShoesUser}" th:object="${shoes}"
         method="post">
 
-    <table border="0" cellpadding="10">
+    <table class="table" border="0" cellpadding="10">
       <tr>
         <td>ID обуви:</td>
         <td><input type="text" th:field="${shoes.idShoes}" readonly/></td>
@@ -25,13 +25,97 @@
       </tr>
       <tr>
         <td>Стоимость:</td>
-        <td><input type="number" step="0.01" min="0" placeholder="0,00" th:field="${shoes.costs}" />Br</td>
+        <td>
+          <input id="here" type="number" step="0.01" min="0" placeholder="0,00" th:field="${shoes.costs}" />
+          <label for="here">Br</label>
+        </td>
       </tr>
       <tr>
-        <td colspan="2"><button type="submit">Сохранить изменения</button> </td>
+        <td colspan="2"><button class="btn" type="submit">Сохранить изменения</button> </td>
       </tr>
     </table>
   </form>
 </div>
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                font-family: Roboto;
+            }
+
+            body {
+                background-color: rgba(128, 128, 128, 0.129);
+            }
+
+            input {
+              width: 80%;
+              margin-bottom: 5%;
+              margin-left: 5%;
+              height: 3vh;
+            }
+
+            button[type="submit"] {
+              margin-top: 5%;
+              margin-left: -10%;
+            }
+
+            .table {
+              width: 35%
+            }
+
+            .wrapper__title {
+                margin-bottom: 3%;
+                font-family: Roboto;
+                font-size: 2rem;
+                font-weight: bold;
+            }
+
+            .wrapper {
+                width: 80%;
+                position: absolute;
+                left: 10%;
+                top: 15%;
+            }
+
+            .wrapper__container {
+                width: 85%;
+            }
+
+            .col-4 {
+                font-family: Roboto;
+                font-size: 1em;
+            }
+
+            .btn {
+                cursor: pointer;
+                width: 100%;
+                position: relative;
+                left: 7%;
+                background-color: cornflowerblue;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                margin: 5px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 1.1em;
+            }
+
+            .exit {
+                margin-top: 10%;
+                background-color: rgba(128, 128, 128);
+            }
+            
+            .btn:hover {
+                transform: scale(1.05);
+                opacity: .9;
+            }
+      </style>
 </body>
 </html>

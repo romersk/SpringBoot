@@ -9,18 +9,16 @@
 <div align="center">
   <h1>Просмотр информации по производителям</h1>
   <form action="#" th:action="@{/admin}">
-    <input type="submit" value="Вернуть назад">
+    <input class="btn" type="submit" value="Вернуть назад">
   </form>
   <form th:action="@{/searchID}" th:object="${person}" method="POST">
-    <div>
-      <select th:field="${person.idPerson}">
+      <select class="selection" th:field="${person.idPerson}">
         <option th:each="person : ${personList}"
                 th:value="${person.idPerson}"
                 th:text="${person.firstName} + ' ' + ${person.secondName}"></option>
       </select>
-    </div>
     <div>
-      <input type="submit" value="Найти" />
+      <input class="btn find" type="submit" value="Найти" />
     </div>
   </form>
 
@@ -46,7 +44,56 @@
       </tbody>
     </table>
   </div>
-
 </div>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .wrapper {
+            position: relative;
+            left: 0%;
+        }
+        
+        .selection {
+            margin: 1%;
+            width: 10%;
+            height: 3vh;
+            outline: none;
+            border: none;
+        }
+
+        .btn {
+            width: 17%;
+            cursor: pointer;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .find {
+          margin-bottom: 2%;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

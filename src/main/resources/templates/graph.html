@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Круговая диаграмма</title>
-	<a href="/admin">Вернуть назад</a>
+	
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript" th:inline="javascript">
     google.charts.load('current', {'packages':['corechart']});
@@ -26,6 +26,44 @@
   </script>
 </head>
 <body>
+    <a href="/admin">
+        <input class="btn" type="submit" value="Вернуть назад">
+    </a>
 <div id="chart_div"></div>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 12%;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

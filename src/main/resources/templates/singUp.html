@@ -7,7 +7,7 @@
 <body>
 <div class="container text-center">
     <div>
-        <h1>Регистрация пользователя</h1>
+        <h1 class="wrapper__title">Регистрация пользователя</h1>
     </div>
     <form action="#" th:action="@{/processRegister}" th:object="${user}"
           method="post" style="max-width: 600px; margin: 0 auto;">
@@ -61,10 +61,90 @@
             </div>
 
             <div>
-                <button type="submit">Зарегистрироваться</button>
+                <button class="btn" type="submit">Зарегистрироваться</button>
             </div>
         </div>
     </form>
 </div>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+
+        .form-control {
+            height: 4vh;
+            border: none;
+            outline: none;
+            width: 80%;
+            position: relative;
+            margin-bottom: 3%;
+        }
+
+        .wrapper__title {
+            margin-bottom: 1%;
+            font-family: Roboto;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 30%;
+        }
+
+        .container {
+            width: 80%;
+            position: absolute;
+            left: 12%;
+            top: 15%;
+        }
+
+        .wrapper__container {
+            width: 85%;
+        }
+
+        .m-3 {
+          margin-left: 7%;
+        }
+
+        .col-4 {
+            font-family: Roboto;
+            font-size: 1em;
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 60%;
+            position: relative;
+            left: 10%;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .exit {
+            margin-top: 10%;
+            background-color: rgba(128, 128, 128);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

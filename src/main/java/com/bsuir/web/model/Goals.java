@@ -15,7 +15,7 @@ public class Goals {
     @Column(nullable = false, length = 64)
     private String nameGoal;
 
-    @OneToMany(mappedBy = "goals", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "goals", fetch = FetchType.EAGER)
     private Collection<GoalsPerson> goalsPeople;
 
     public Collection<GoalsPerson> getGoalsPeople() {

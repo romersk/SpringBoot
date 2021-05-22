@@ -8,7 +8,9 @@
 <body>
 <div align="center">
   <h1>Личная информация</h1>
-  <a href="/user">Вернуть назад</a>
+   <a class="wrapper" href="/user">
+      <input class="btn" type="button" value="Вернуть назад">
+  </a>
   <br/><br/>
   <table border="1" cellpadding="10">
     <thead>
@@ -29,5 +31,42 @@
     </tbody>
   </table>
 </div>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .wrapper {
+            position: relative;
+            left: 0%;
+        }
+
+        .btn {
+            cursor: pointer;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

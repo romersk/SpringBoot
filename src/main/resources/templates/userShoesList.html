@@ -1,39 +1,75 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8"/>
-  <title>Список обуви</title>
-</head>
-<body>
-<div align="center">
-  <h1>Список обуви</h1>
-  <form action="#" th:action="@{/user}">
-    <input type="submit" value="Вернуть назад">
-  </form>
-  <br/><br/>
-  <table border="1" cellpadding="10">
-    <thead>
-    <tr>
-      <th>ID обуви</th>
-      <th>Наименование</th>
-      <th>Цена</th>
-      <th>Действия</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="shoes : ${shoesList}">
-      <td th:text="${shoes.idShoes}">ID Пользователя</td>
-      <td th:text="${shoes.nameShoes}">Наименование</td>
-      <td th:text="${shoes.costs}">Цена</td>
-      <td>
-        <a th:href="@{'/editShoesUser/' + ${shoes.idShoes}}">Изменить</a>
-        &nbsp;&nbsp;&nbsp;
-        <a th:href="@{'/deleteShoesUser/' + ${shoes.idShoes}}">Удалить</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>Список обуви</title>
+  </head>
+  <body>
+    <div align="center">
+      <h1>Список обуви</h1>
+      <form action="#" th:action="@{/user}">
+        <input class="btn" type="submit" value="Вернуть назад" />
+      </form>
+      <br /><br />
+      <table border="1" cellpadding="10">
+        <thead>
+          <tr>
+            <th>ID обуви</th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="shoes : ${shoesList}">
+            <td th:text="${shoes.idShoes}">ID Пользователя</td>
+            <td th:text="${shoes.nameShoes}">Наименование</td>
+            <td th:text="${shoes.costs}">Цена</td>
+            <td>
+              <a th:href="@{'/editShoesUser/' + ${shoes.idShoes}}">Изменить</a>
+              &nbsp;&nbsp;&nbsp;
+              <a th:href="@{'/deleteShoesUser/' + ${shoes.idShoes}}">Удалить</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap");
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: Roboto;
+      }
+
+      body {
+        background-color: rgba(128, 128, 128, 0.129);
+      }
+
+      .wrapper {
+        position: relative;
+        left: 0%;
+      }
+
+      .btn {
+        cursor: pointer;
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        margin: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1.1em;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+    </style>
+  </body>
 </html>

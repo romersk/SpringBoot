@@ -8,18 +8,21 @@
 <body>
 <div align="center">
   <h1>Список произведенной обуви</h1>
-  <form action="#" th:action="@{/admin}">
-    <input type="submit" value="Вернуть назад">
+  <div class="wrapper__container">
+    <form action="#" th:action="@{/admin}">
+    <input class="btn" type="submit" value="Вернуть назад">
   </form>
   <form action="#" th:action="@{/sortByName}">
-    <input type="submit" value="Сортировка по наименованию">
+    <input class="btn" type="submit" value="Сортировка по наи менованию">
   </form>
   <form action="#" th:action="@{/sortById}">
-    <input type="submit" value="Сортировка по ID">
+    <input class="btn" type="submit" value="Сортировка по ID">
   </form>
   <form action="#" th:action="@{/sortByCosts}">
-    <input type="submit" value="Сортировка по стоимости">
+    <input class="btn" type="submit" value="Сортировка по стоимости">
   </form>
+  </div>
+
   <br/><br/>
   <table border="1" cellpadding="10">
     <thead>
@@ -48,5 +51,77 @@
     </tbody>
   </table>
 </div>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .wrapper__title {
+            margin-bottom: 3%;
+            margin-left: 5%;
+            font-family: Roboto;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .wrapper {
+            width: 30%;
+            position: absolute;
+            left: 33%;
+            top: 2%;
+        }
+
+      .wrapper__container {
+        position: relative;
+        left: -20%;
+      }
+
+        .btn {
+            cursor: pointer;
+            width: 20%;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+        }
+        
+        .table {
+          position: relative;
+          left: 36%;
+        }
+
+        .btn:not(.special) {
+          position: relative;
+          left: 20%;
+        }
+
+        .special {
+          width: 140%;
+        }
+
+        .exit {
+            margin-top: 10%;
+            background-color: rgba(128, 128, 128);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

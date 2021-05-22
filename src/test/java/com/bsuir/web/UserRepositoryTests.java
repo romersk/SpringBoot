@@ -135,16 +135,24 @@ public class UserRepositoryTests {
     @Test
     public void testNewGoals()
     {
-        GoalsPerson goalsPerson = new GoalsPerson();
+//        GoalsPerson goalsPerson = new GoalsPerson();
+//
+//        Person person = personRepository.findByName("Игорь");
+//        Goals goals = goalsRepository.findById(Long.valueOf(5)).get();
+//
+//        goalsPerson.setPerson(person);
+//        goalsPerson.setGoals(goals);
+//        goalsPerson.setRate(Double.valueOf(0.05));
+//
+//        goalsPersonRepository.save(goalsPerson);
 
-        Person person = personRepository.findByName("Игорь");
-        Goals goals = goalsRepository.findById(Long.valueOf(5)).get();
+        Goals goals = new Goals();
+        goals.setNameGoal("11111");
+        goalsRepository.save(goals);
 
-        goalsPerson.setPerson(person);
-        goalsPerson.setGoals(goals);
-        goalsPerson.setRate(Double.valueOf(0.05));
-
-        goalsPersonRepository.save(goalsPerson);
+        Goals goals1 = new Goals();
+        goals1.setNameGoal("dfdfdddddd");
+        goalsRepository.save(goals1);
 
         //assertThat(goals.getIdGoal()).isEqualTo(Long.valueOf(1));
 

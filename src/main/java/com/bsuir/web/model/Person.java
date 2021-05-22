@@ -21,13 +21,13 @@ public class Person {
     @Column(nullable = false, length = 64)
     private String workPlace;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
     private Users users;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person", fetch = FetchType.EAGER)
     private Collection<Shoes> shoesCollection;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person"/*,fetch = FetchType.EAGER*/)
     private Collection<GoalsPerson> goalsPeople;
 
     public Collection<GoalsPerson> getGoalsPeople() {

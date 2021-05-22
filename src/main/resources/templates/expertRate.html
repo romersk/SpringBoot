@@ -6,7 +6,8 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/expert">Вернуть назад</a>
+    <div class="wrapper">
+        
 
 <table border="1" cellpadding="10" align="center">
     <thead>
@@ -35,17 +36,89 @@
                     <input type="number" th:field="*{matrix[__${i.index}__][__${j.index}__]}" required min="0" max="${size}"/>
                 </div>
                 <div th:unless="${j.index} &gt ${i.index}">
-                    <input type="number" th:field="*{matrix[__${i.index}__][__${j.index}__]}" readonly/>
+                    <input class="disabled" type="number" readonly/>
+                    <input type="hidden" th:field="*{matrix[__${i.index}__][__${j.index}__]}"/>
                 </div>
             </td>
         </tr>
     </table>
 
-    <div>
-        <button type="submit">Сохранить результаты</button>
+    <div class="btns">
+        <button class="btn" type="submit">Сохранить результаты</button>
+        <a href="/expert">
+            <input class="btn btn_link" value="Вернуть назад" type="submit">
+        </a>
     </div>
-
 </form>
+    </div>
+    
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            box-sizing: border-box;
+        }
 
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .wrapper {
+            width: 100%;
+            display: block;
+            position: absolute;
+            top: 15%;
+        }
+
+        .btn {
+            width: 20%;
+            cursor: pointer;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .disabled {
+            cursor: not-allowed;
+            background-color: silver;
+        }
+
+        .btn_link {
+            width: 160%;
+        }
+
+        .number {
+            width: 25%;
+            margin-left: 37%;
+            margin-bottom: 1%;
+        }
+
+        input[type="number"] {
+            outline: none;
+            border: none;
+            height: 2.5vh;
+        }
+
+        .btns {
+            margin-top: 2%;
+            display: flex;
+            position: relative;
+            left: 30%;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

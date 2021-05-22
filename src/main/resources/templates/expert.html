@@ -6,16 +6,77 @@
     <title>User</title>
 </head>
 <body>
-<form th:action="@{/}">
-    <input type="submit" value="Выйти"/>
-</form>
-<h2>Меню пользователя</h2>
-<form action="#" th:action="@{/expertInfo}">
-    <input type="submit" value="Личная информация">
-</form>
-<form action="#" th:action="@{/expertRate}">
-    <input type="submit" value="Решение экспертного метода">
-</form>
-</body>
+    <div class="wrapper">
+        <h2 class="wrapper__title">Меню пользователя</h2>
+        <form action="#" th:action="@{/expertInfo}">
+            <input class="btn" type="submit" value="Личная информация">
+        </form>
+        <form action="#" th:action="@{/expertRate}">
+            <input class="btn" type="submit" value="Решение экспертного метода">
+        </form>
+        <form th:action="@{/exit}">
+            <input class="btn exit" type="submit" value="Выйти"/>
+        </form>
+    </div>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .wrapper__title {
+            margin-bottom: 3%;
+            margin-left: 17%;
+            font-family: Roboto;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .wrapper {
+            width: 30%;
+            position: absolute;
+            left: 34%;
+            top: 15%;
+        }
+
+        .wrapper__container {
+            width: 85%;
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 100%;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .exit {
+            margin-top: 10%;
+            background-color: rgba(128, 128, 128);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
+</body>
 </html>

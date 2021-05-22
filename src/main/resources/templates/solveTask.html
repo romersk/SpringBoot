@@ -30,10 +30,10 @@
 <div align="center">
   <h1>Список исследуемых целей</h1>
   <form action="#" th:action="@{/admin}">
-    <input type="submit" value="Вернуть назад">
+    <input class="btn" type="submit" value="Вернуть назад">
   </form>
   <form action="#" th:action="@{/downloadRate}">
-    <input type="submit" value="Файловый отчет об экспертном методе">
+    <input class="btn" type="submit" value="Файловый отчет об экспертном методе">
   </form>
   <br/><br/>
   <table border="1" cellpadding="10">
@@ -52,5 +52,46 @@
   </table>
 </div>
 <div id="chart_div"></div>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .wrapper {
+            position: relative;
+            left: 0%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn {
+            cursor: pointer;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

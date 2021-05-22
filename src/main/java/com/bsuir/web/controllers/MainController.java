@@ -48,10 +48,24 @@ public class MainController {
 
     private Users customUserDetails;
 
+    private int counterOfUsers = 0;
+
     @GetMapping("")
     public String viewHomePage(Model model)
     {
         model.addAttribute("user", new Users());
+        return "index";
+    }
+
+    @GetMapping("/exit")
+    public String exit(Model model) {
+        counterOfUsers--;
+        System.out.println();
+        System.out.println("Количество подключенных пользователей - " + counterOfUsers);
+        System.out.println();
+
+        model.addAttribute("user", new Users());
+
         return "index";
     }
 
@@ -104,6 +118,16 @@ public class MainController {
             {
                 if (user.getPassword().equals(users.getPassword()))
                 {
+                    if (counterOfUsers == 0) {
+                        counterOfUsers = 1;
+                    } else {
+                        counterOfUsers++;
+                    }
+
+                    System.out.println();
+                    System.out.println("Количество подключенных пользователей - " + counterOfUsers);
+                    System.out.println();
+
                     customUserDetails = new Users();
                     customUserDetails.setId(users.getId());
                     customUserDetails.setRole(users.getRole());
@@ -135,6 +159,7 @@ public class MainController {
     @GetMapping("/user")
     public String userPage()
     {
+
         return  "user";
     }
 
@@ -196,7 +221,7 @@ public class MainController {
         return mav;
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable(name = "id") Long id) {
         usersService.delete(id);
         return "redirect:/adminUserList";
@@ -305,8 +330,9 @@ public class MainController {
         return mav;
     }
 
-    @PostMapping("/deleteShoesUser/{id}")
+    @GetMapping("/deleteShoesUser/{id}")
     public String deleteShoesUser(@PathVariable(name = "id") Long id) {
+        System.out.println(id);
         shoesRepository.deleteById(id);
         return "redirect:/userShoesList";
     }
@@ -368,10 +394,17 @@ public class MainController {
         List<List<Long>> list= formBean.getMatrix();
         int sizeMax = list.size() * (list.size()-1);
 
+
         for (int i=0; i < list.size(); i++) {
-            for (int j=i+1; j < list.size(); j++) {
-                Long temp = Long.valueOf(sizeMax) - list.get(i).get(j);
-                list.get(j).set(i, temp);
+            for (int j=0; j < list.size(); j++) {
+
+                if (j > i) {
+                    Long temp = Long.valueOf(sizeMax) - list.get(i).get(j);
+                    list.get(j).set(i, temp);
+                } else {
+                    list.get(i).set(j,Long.valueOf(0));
+                }
+
             }
         }
 
@@ -394,6 +427,7 @@ public class MainController {
 
         List<Goals> goalsList = goalsRepository.findAll();
         List<GoalsPerson> goalsPerson = goalsPersonRepository.findByPersonId(customUserDetails.getPerson().getIdPerson());
+
 
         for (int i=0; i < goalsList.size(); i++) {
 

@@ -6,24 +6,25 @@
   <title>Фильрация</title>
 </head>
 <body>
-<div align="center">
+<div class="wrapper" align="center">
   <h1>Функции фильрации данных</h1>
-  <form action="#" th:action="@{/admin}">
-    <input type="submit" value="Вернуть назад">
+  <div class="wrapper__container">
+    <form action="#" th:action="@{/admin}">
+    <input class="btn" type="submit" value="Вернуть назад">
   </form>
   <form action="#" th:action="@{/filtrateCheap}">
-    <input type="submit" value="Вывод информации об обуви дешевле 50р">
+    <input class="btn" type="submit" value="Вывод информации об обуви дешевле 50р">
   </form>
   <form action="#" th:action="@{/filtrateExpensive}">
-    <input type="submit" value="Вывод информации об обуви дороже 150р">
+    <input class="btn" type="submit" value="Вывод информации об обуви дороже 150р">
   </form>
   <form action="#" th:action="@{/filtratePeople}">
-    <input type="submit" value="Вывод информации об обуви, произведенной больше всего одним работником">
+    <input class="btn special" type="submit" value="Вывод информации об обуви, произведенной больше всего одним работником">
   </form>
   <br/><br/>
   <div class="alert" th:if="${message}" th:text="${message}"></div>
   <div th:unless="${message}">
-    <table border="1" cellpadding="10">
+    <table class="table" border="1" cellpadding="10">
       <thead>
       <tr>
         <th>ID Обуви</th>
@@ -44,6 +45,79 @@
       </tbody>
     </table>
   </div>
+  </div>
 </div>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .wrapper__title {
+            margin-bottom: 3%;
+            margin-left: 5%;
+            font-family: Roboto;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .wrapper {
+            width: 30%;
+            position: absolute;
+            left: 33%;
+            top: 2%;
+        }
+
+        .wrapper__container {
+          position: relative;
+          left: -20%;
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 100%;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+        }
+        
+        .table {
+          position: relative;
+          left: 10%;
+        }
+
+        .btn:not(.special) {
+          position: relative;
+          left: 20%;
+        }
+
+        .special {
+          width: 140%;
+        }
+
+        .exit {
+            margin-top: 10%;
+            background-color: rgba(128, 128, 128);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

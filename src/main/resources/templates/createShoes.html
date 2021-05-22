@@ -5,33 +5,108 @@
   <title>Производство</title>
 </head>
 <body>
-<div class="container text-center">
-  <div>
-    <h1>Производство новой обуви</h1>
+  <div class="wrapper">
+    <h1 class="wrapper__title">Производство новой обуви</h1>
+    <form action="#" th:action="@{/processShoes}" th:object="${shoes}"
+          method="post">
+      <div class="m-3">
+        <div class="form-group row">
+          <div class="alert" th:if="${message}" th:text="${message}">
+          </div>
+          <label class="col-4 col-form-label">Наимненование обуви: </label>
+          <div class="col-8">
+            <input type="text" th:field="${shoes.nameShoes}" class="form-control" required minlength="5" maxlength="30"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label">Стоимость: </label>
+          <div class="col-8">
+            <input class="form-control" type="number" step="0.01" min="0" placeholder="0,00" th:field="${shoes.costs}" required/>
+          </div>
+        </div>
+        <button class="btn" type="submit">Сохранить</button>
+      </div>
+    </form>
   </div>
-  <form action="#" th:action="@{/processShoes}" th:object="${shoes}"
-        method="post" style="max-width: 600px; margin: 0 auto;">
-    <div class="m-3">
-      <div class="form-group row">
-        <div class="alert" th:if="${message}" th:text="${message}"></div>
-        <label class="col-4 col-form-label">Наимненование обуви: </label>
-        <div class="col-8">
-          <input type="text" th:field="${shoes.nameShoes}" class="form-control" required minlength="5" maxlength="30"/>
-        </div>
-      </div>
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <div class="form-group row">
-        <label class="col-4 col-form-label">Стоимость: </label>
-        <div class="col-8">
-          <input type="number" step="0.01" min="0" placeholder="0,00" th:field="${shoes.costs}" required/>
-        </div>
-      </div>
+        html {
+            font-family: Roboto;
+        }
 
-      <div>
-        <button type="submit">Сохранить</button>
-      </div>
-    </div>
-  </form>
-</div>
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+
+        .form-control {
+            height: 4vh;
+            border: none;
+            outline: none;
+            width: 80%;
+            position: relative;
+            margin-bottom: 3%;
+        }
+
+        .wrapper__title {
+            margin-bottom: 5%;
+            font-family: Roboto;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .wrapper {
+            width: 30%;
+            position: absolute;
+            left: 35%;
+            top: 15%;
+        }
+
+        .wrapper__container {
+            width: 85%;
+        }
+
+        .m-3 {
+          margin-left: 7%;
+        }
+
+        .col-4 {
+            font-family: Roboto;
+            font-size: 1em;
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 60%;
+            position: relative;
+            left: 10%;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .exit {
+            margin-top: 10%;
+            background-color: rgba(128, 128, 128);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 </html>

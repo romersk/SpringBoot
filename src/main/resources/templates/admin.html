@@ -6,37 +6,101 @@
     <title>Admin</title>
 </head>
 <body>
-<form th:action="@{/}">
-    <input type="submit" value="Выйти"/>
-</form>
-<h2>Меню администратора</h2>
-<form action="#" th:action="@{/adminInfo}">
-    <input type="submit" value="Личная информация">
-</form>
-<form action="#" th:action="@{/adminUserList}">
-    <input type="submit" value="Управление пользователями">
-</form>
-<form action="#" th:action="@{/downloadUsers}">
-    <input type="submit" value="Файловый отчет о данных пользователей">
-</form>
-<form action="#" th:action="@{/shoesList}">
-    <input type="submit" value="Управление производством обуви">
-</form>
-<form action="#" th:action="@{/filtrate}">
-    <input type="submit" value="Фильтрации данных">
-</form>
-<form action="#" th:action="@{/graph}">
-    <input type="submit" value="Создание графического отчета">
-</form>
-<form action="#" th:action="@{/search}">
-    <input type="submit" value="Просмотр информации по параметру">
-</form>
-<form action="#" th:action="@{/goalsList}">
-    <input type="submit" value="Администрирование целями">
-</form>
-<form action="#" th:action="@{/solveTask}">
-    <input type="submit" value="Решение экспертного метода">
-</form>
+    <div class="wrapper">
+        <h2 class="wrapper__title">Меню администратора</h2>
+        <div class="wrapper__container">
+            <form action="#" th:action="@{/adminInfo}">
+                <input class="btn" type="submit" value="Личная информация">
+            </form>
+            <form action="#" th:action="@{/adminUserList}">
+                <input class="btn" type="submit" value="Управление пользователями">
+            </form>
+            <form action="#" th:action="@{/downloadUsers}">
+                <input class="btn" type="submit" value="Файловый отчет о данных пользователей">
+            </form>
+            <form action="#" th:action="@{/shoesList}">
+                <input class="btn" type="submit" value="Управление производством обуви">
+            </form>
+            <form action="#" th:action="@{/filtrate}">
+                <input class="btn" type="submit" value="Фильтрации данных">
+            </form>
+            <form action="#" th:action="@{/graph}">
+                <input class="btn" type="submit" value="Создание графического отчета">
+            </form>
+            <form action="#" th:action="@{/search}">
+                <input class="btn" type="submit" value="Просмотр информации по параметру">
+            </form>
+            <form action="#" th:action="@{/goalsList}">
+                <input class="btn" type="submit" value="Администрирование целями">
+            </form>
+            <form action="#" th:action="@{/solveTask}">
+                <input class="btn" type="submit" value="Решение экспертного метода">
+            </form>
+            <form th:action="@{/exit}">
+                <input class="btn exit" type="submit" value="Выйти"/>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: Roboto;
+        }
+
+        body {
+            background-color: rgba(128, 128, 128, 0.129);
+        }
+
+        .wrapper__title {
+            margin-bottom: 3%;
+            margin-left: 5%;
+            font-family: Roboto;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .wrapper {
+            width: 30%;
+            position: absolute;
+            left: 37%;
+            top: 2%;
+        }
+
+        .wrapper__container {
+            width: 85%;
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 100%;
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            margin: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        .exit {
+            margin-top: 10%;
+            background-color: rgba(128, 128, 128);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: .9;
+        }
+    </style>
 </body>
 
 </html>

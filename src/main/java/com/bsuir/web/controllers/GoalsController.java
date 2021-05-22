@@ -46,9 +46,9 @@ public class GoalsController {
         return mav;
     }
 
-    @PostMapping("/deleteGoals/{id}")
-    public String deleteShoes(@PathVariable(name = "id") Long id) {
-        goalsRepository.deleteById(id);;
+    @GetMapping("/deleteGoals/{id}")
+    public String deleteGoals(@PathVariable(name = "id") Long id) {
+        goalsRepository.deleteById(id);
         return "redirect:/goalsList";
     }
 
@@ -56,6 +56,7 @@ public class GoalsController {
     public String solveTask(Model model) {
 
         Map<String, Double> goalsPersonList = getHashMap();
+
 
         model.addAttribute("goalsList", goalsPersonList);
 
@@ -101,10 +102,12 @@ public class GoalsController {
             String name = goalsPersonList.get(i).getGoals().getNameGoal();
 
             Double cost = goalsPersonList.get(i).getRate();
+            cost = (double) Math.round(cost * 1000) / 1000;
 
             if (hashMap.containsKey(name)) {
                 double sum = hashMap.get(name);
                 sum += cost;
+                sum = (double) Math.round(sum * 1000) / 1000;
                 hashMap.put(name, sum);
             } else {
                 hashMap.put(name, cost);
